@@ -1,0 +1,640 @@
+/* 扁平化浅色画板 */
+.canvas-board-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #F5F5F5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* 控制面板 - 扁平化设计 */
+.control-panel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E0E0E0;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333333;
+  font-weight: 500;
+  font-size: 14px;
+  background: #F9F9F9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #E0E0E0;
+}
+
+.control-group label {
+  font-size: 14px;
+  white-space: nowrap;
+  color: #666666;
+  font-weight: 500;
+}
+
+.color-picker {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #BDBDBD;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.color-value {
+  font-size: 12px;
+  font-family: 'Consolas', monospace;
+  background: #E0E0E0;
+  color: #333333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.size-slider {
+  width: 100px;
+  height: 4px;
+  cursor: pointer;
+  background: #E0E0E0;
+  border-radius: 2px;
+}
+
+.size-value {
+  font-size: 12px;
+  font-family: 'Consolas', monospace;
+  background: #E0E0E0;
+  color: #333333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.style-select {
+  padding: 6px 12px;
+  border: 1px solid #BDBDBD;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #333333;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+}
+
+.style-select:focus {
+  border-color: #90CAF9;
+}
+
+/* 工具选择器 - 扁平化设计 */
+.tool-selector {
+  border-right: 1px solid #E0E0E0;
+  padding-right: 16px;
+}
+
+.tool-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tool-btn {
+  padding: 8px 16px;
+  border: 1px solid #BDBDBD;
+  border-radius: 8px;
+  background: #F5F5F5;
+  color: #666666;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tool-btn.active {
+  background: #90CAF9;
+  color: #FFFFFF;
+  border-color: #64B5F6;
+}
+
+/* 画笔和橡皮擦设置区域 - 扁平化设计 */
+.brush-settings,
+.eraser-settings {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* 橡皮擦大小按钮 - 扁平化按钮 */
+.eraser-size-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.size-btn {
+  padding: 6px 12px;
+  border: 1px solid #BDBDBD;
+  border-radius: 6px;
+  background: #F5F5F5;
+  color: #666666;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 45px;
+}
+
+.size-btn.active {
+  background: #81C784;
+  color: #FFFFFF;
+  border-color: #66BB6A;
+}
+
+.buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: 1px solid #BDBDBD;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #FFFFFF;
+  background: #9E9E9E;
+}
+
+/* 清空按钮 - 浅红色 */
+.btn-clear {
+  background: #EF9A9A;
+  border-color: #E57373;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 下载按钮 - 浅绿色 */
+.btn-download {
+  background: #A5D6A7;
+  border-color: #81C784;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 背景按钮 - 浅紫色 */
+.btn-background {
+  background: #CE93D8;
+  border-color: #BA68C8;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 保存按钮 - 浅蓝色 */
+.btn-save {
+  background: #90CAF9;
+  border-color: #64B5F6;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 加载按钮 - 浅黄色 */
+.btn-load {
+  background: #FFF59D;
+  border-color: #FFEE58;
+  color: #666666;
+  font-size: 16px;
+}
+
+/* 全屏按钮 - 浅青色 */
+.btn-fullscreen {
+  background: #80DEEA;
+  border-color: #4DD0E1;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 手机模式按钮 - 浅粉色 */
+.btn-phone-mode {
+  background: #F48FB1;
+  border-color: #EC407A;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+/* 手机模式浮动按钮容器 - 扁平化设计 */
+.phone-mode-controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.floating-btn {
+  position: absolute;
+  padding: 12px 20px;
+  border: 2px solid #BDBDBD;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+/* 返回按钮 - 左上角 - 浅橙色 */
+.back-btn {
+  top: 20px;
+  left: 20px;
+  background: #FFCC80;
+  color: #FFFFFF;
+  border-color: #FFB74D;
+}
+
+/* 清空画布按钮 - 右上角 - 浅红色 */
+.clear-btn {
+  top: 20px;
+  right: 20px;
+  background: #EF9A9A;
+  color: #FFFFFF;
+  border-color: #E57373;
+}
+
+/* 工具切换按钮 - 左下角 - 浅蓝色 */
+.tool-toggle-btn {
+  bottom: 20px;
+  left: 20px;
+  background: #90CAF9;
+  color: #FFFFFF;
+  border-color: #64B5F6;
+  font-size: 20px;
+}
+
+/* 颜色选择按钮 - 右下角 - 浅紫色 */
+.color-btn {
+  bottom: 20px;
+  right: 20px;
+  background: #CE93D8;
+  color: #FFFFFF;
+  border-color: #BA68C8;
+  font-size: 20px;
+}
+
+/* 颜色选择器弹窗 - 扁平化设计 */
+.color-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  z-index: 2001;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E0E0E0;
+  background: #F5F5F5;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #333333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: #EF9A9A;
+  border: 1px solid #E57373;
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* 预设颜色网格 - 扁平化设计 */
+.preset-colors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.color-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.color-item.active {
+  border-color: #90CAF9;
+  border-width: 3px;
+}
+
+.check-mark {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* 自定义颜色选择器 */
+.custom-color {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #3e3e42;
+}
+
+.custom-color label {
+  color: #cccccc;
+  font-size: 13px;
+}
+
+.custom-color-input {
+  width: 60px;
+  height: 40px;
+  border: 1px solid #3e3e42;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.custom-color-input:hover {
+  border-color: #007acc;
+}
+
+.custom-color .color-value {
+  font-size: 12px;
+  font-family: 'Consolas', monospace;
+  background: #3e3e42;
+  color: #cccccc;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+/* Canvas 画布 - 扁平化设计 */
+.canvas {
+  flex: 1;
+  background: #FFFFFF;
+  cursor: crosshair;
+  touch-action: none; /* 防止浏览器默认触摸手势 */
+  user-select: none; /* 防止文本选择 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+/* 全屏模式样式 - 扁平化设计 */
+:fullscreen .canvas-board-container,
+:-webkit-full-screen .canvas-board-container,
+:-moz-full-screen .canvas-board-container,
+:-ms-fullscreen .canvas-board-container {
+  background: #F5F5F5;
+}
+
+:fullscreen .control-panel,
+:-webkit-full-screen .control-panel,
+:-moz-full-screen .control-panel,
+:-ms-fullscreen .control-panel {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .control-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .control-group {
+    justify-content: space-between;
+  }
+
+  .tool-selector {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-right: 0;
+    padding-bottom: 10px;
+  }
+
+  .tool-buttons {
+    width: 100%;
+  }
+
+  .tool-btn {
+    flex: 1;
+  }
+
+  .brush-settings,
+  .eraser-settings {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .buttons {
+    margin-left: 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+/* 背景图片选择器弹窗 */
+.background-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background-modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  width: 800px;
+}
+
+/* 预设背景图片网格 */
+.preset-backgrounds {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 4px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.background-item {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #E0E0E0;
+  overflow: hidden;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.background-item:hover {
+  border-color: #90CAF9;
+}
+
+/* 响应式设计 - 背景图片选择器 */
+@media (max-width: 768px) {
+  .background-modal-content {
+    width: 95%;
+    max-height: 85%;
+  }
+
+  .preset-backgrounds {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .preset-backgrounds {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* 多人协作状态指示器 - 扁平化设计 */
+.collaboration-status {
+  margin-left: auto;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #F9F9F9;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.status-indicator.connected {
+  border-color: #81C784;
+  background: #E8F5E9;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #EF5350;
+}
+
+.status-indicator.connected .status-dot {
+  background: #66BB6A;
+}
+
+.status-text {
+  color: #666666;
+  font-weight: 500;
+}
+
+.user-count {
+  color: #66BB6A;
+  font-weight: 600;
+  padding-left: 8px;
+  border-left: 1px solid #E0E0E0;
+}
+
+/* iconfont 图标样式调整 */
+.tool-btn .iconfont,
+.btn .iconfont,
+.floating-btn .iconfont {
+  font-size: 18px;
+  display: inline-block;
+}
+
+.tool-btn .iconfont {
+  font-size: 20px;
+}
+
+.floating-btn .iconfont {
+  font-size: 24px;
+}
+
