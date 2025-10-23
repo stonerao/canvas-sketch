@@ -1,7 +1,7 @@
 # Canvas Collaboration - Real-time Multi-user Drawing Board
 
 A real-time collaborative drawing application that allows multiple users to draw together on the same canvas simultaneously. Built with Vue 3, Vite, Node.js, Koa2, and Socket.IO for seamless real-time synchronization.
-
+![图片展示](img.jpg)
 ## Features
 
 - Real-time collaborative drawing with multiple users
