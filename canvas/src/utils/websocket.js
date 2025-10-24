@@ -32,7 +32,7 @@ let socket = null
 
 // 连接状态
 let isConnected = false
-
+console.log(import.meta.env.VITE_WS_URL)
 // 服务器地址配置
 const SERVER_URL = import.meta.env.VITE_WS_URL || 'http://localhost:3000'
 

@@ -6,11 +6,17 @@
 const Koa = require('koa')
 const cors = require('@koa/cors')
 const http = require('http')
+const path = require('path')
+const serve = require('koa-static')
 const config = require('./config')
 const { initWebSocket } = require('./websocket')
 
 // 创建 Koa 应用实例
 const app = new Koa()
+
+// 静态文件服务（在其他路由之前注册）
+const staticDir = path.resolve(__dirname, '..', 'public')
+app.use(serve(staticDir))
 
 // 配置 CORS 跨域
 app.use(cors(config.cors))
